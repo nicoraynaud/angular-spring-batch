@@ -1,0 +1,8 @@
+<div *ngIf="loading" class="lead text-secondary">
+  {{loadingMessage}}
+</div>
+
+<div *ngIf="!loading && loadError" class="lead text-danger">
+  <fa-icon class="mr-1" [fixedWidth]="true" icon="exclamation-triangle"></fa-icon>
+  {{loadErrorMessage}}
+</div>

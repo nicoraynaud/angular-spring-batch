@@ -1,0 +1,89 @@
+<div class="bg-light border rounded p-2">
+  <h5 class="d-flex justify-content-between mb-3">
+    <span [title]="step.status.label">
+      <fa-icon [fixedWidth]="true" [icon]="step.status.icon" [ngClass]="'text-' + step.status.color"></fa-icon>
+      {{step.name}}
+    </span>
+
+    <a class="btn btn-primary" target="_blank" [href]="step.logsUrl">
+      <fa-icon [fixedWidth]="true" icon="tasks"></fa-icon>
+    </a>
+  </h5>
+
+  <div class="metadata px-2">
+    <div class="row">
+      <div class="col-4 text-truncate" [title]="step.startTime | date:'dd/MM/yy HH:mm:ss'">
+        <strong>Début :</strong>
+        {{step.startTime | date:'dd/MM/yy HH:mm:ss'}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.endTime | date:'dd/MM/yy HH:mm:ss'">
+        <strong>Fin :</strong>
+        {{step.endTime | date:'dd/MM/yy HH:mm:ss'}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.duration | springBatchDuration">
+        <strong>Durée :</strong>
+        {{step.duration | springBatchDuration}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 text-truncate" [title]="step.exitCode">
+        <strong>Code de sortie :</strong>
+        {{step.exitCode}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.exitMessage">
+        <strong>Message :</strong>
+        {{step.exitMessage}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 text-truncate" [title]="step.commitCount">
+        <strong>Commits :</strong>
+        {{step.commitCount}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.writeCount">
+        <strong>Écritures :</strong>
+        {{step.writeCount}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.writeSkipCount">
+        <strong>Écritures évitées :</strong>
+        {{step.writeSkipCount}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 text-truncate" [title]="step.readCount">
+        <strong>Lectures :</strong>
+        {{step.readCount}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.readSkipCount">
+        <strong>Lectures évitées :</strong>
+        {{step.readSkipCount}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.filterCount">
+        <strong>Filtres :</strong>
+        {{step.filterCount}}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-4 text-truncate" [title]="step.rollbackCount">
+        <strong>Rollbacks :</strong>
+        {{step.rollbackCount}}
+      </div>
+
+      <div class="col-4 text-truncate" [title]="step.processSkipCount">
+        <strong>Processus évitées :</strong>
+        {{step.processSkipCount}}
+      </div>
+    </div>
+  </div>
+</div>

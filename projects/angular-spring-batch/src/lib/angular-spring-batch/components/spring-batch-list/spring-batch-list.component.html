@@ -1,0 +1,16 @@
+<div class="border-right h-100 list-group list-group-flush">
+  <a *ngFor="let job of jobs" class="list-group-item list-group-item-action" href="#" (click)="onSelect($event, job)" [ngClass]="{ active: selected === job }">
+    <div class="align-items-center d-flex justify-content-between">
+      <div class="mr-1 text-truncate">
+        <div>{{job.name}}</div>
+        <small [ngClass]="{ 'text-secondary': selected !== job }">{{job.description}}</small>
+      </div>
+      <fa-icon class="ml-2" [fixedWidth]="true" [icon]="job.lastExecutionStatus.icon" [ngClass]="(selected === job) ? '' : 'text-' + job.lastExecutionStatus.color"></fa-icon>
+    </div>
+  </a>
+
+  <div *ngIf="!loading && !loadError && jobs.length === 0" class="align-items-center d-flex h-100 justify-content-center lead mx-2 text-secondary">Aucun job</div>
+
+  <spring-batch-loading-indicator-message *ngIf="loading || loadError" class="align-items-center d-flex h-100 justify-content-center mx-2" [loadError]="loadError" loadErrorMessage="Erreur lors du chargement des jobs !"
+    [loading]="loading" loadingMessage="Chargement des jobs..."></spring-batch-loading-indicator-message>
+</div>

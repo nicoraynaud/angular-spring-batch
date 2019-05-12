@@ -1,0 +1,15 @@
+:host {
+  display: block;
+
+  h6 button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+  }
+
+  td .btn {
+    padding: 0.2rem 0.5rem;
+  }
+}

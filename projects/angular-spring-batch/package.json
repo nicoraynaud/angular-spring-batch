@@ -1,0 +1,25 @@
+{
+  "name": "angular-spring-batch",
+  "description": "Composant permettant la gestion des jobs pour Angular 5+",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "author": {
+    "name": "Alexis Toulotte",
+    "email": "alexis.toulotte@skazy.nc",
+    "url": "https://alweb.org"
+  },
+  "dependencies": {
+    "@fortawesome/angular-fontawesome": "^0.1.1",
+    "@fortawesome/fontawesome-svg-core": "^1.2.4",
+    "@fortawesome/free-solid-svg-icons": "^5.3.1",
+    "class-transformer": "^0.1.9",
+    "moment-mini": "^2.19.4",
+    "angular2-text-mask": "^9.0.0",
+    "text-mask-addons": "^3.7.2"
+  },
+  "peerDependencies": {
+    "@angular/common": "^6.1.0",
+    "@angular/core": "^6.1.0",
+    "bootstrap": "^4.1.3"
+  }
+}

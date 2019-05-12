@@ -1,0 +1,20 @@
+<form class="form-inline">
+  <div class="form-group mb-2 mr-4">
+    <select class="form-control" name="status" [ngModel]="filters.status" (ngModelChange)="onStatusChange($event)">
+      <option [ngValue]="null">Tous les statuts</option>
+      <option *ngFor="let status of statuses" [ngValue]="status">{{status.label}}</option>
+    </select>
+  </div>
+
+  <div class="form-group mb-2 mr-2 no-wrap">
+    <label for="spring-batch-execution-filters-begin-date">Date de début du :</label>
+    <input class="form-control ml-2" id="spring-batch-execution-filters-begin-date" name="beginDate" placeholder="jj/mm/aaaa HH:MM:SS" type="text" [ngModel]="beginDateInputValue" (ngModelChange)="onBeginDateChange($event)"
+      [textMask]="dateTextMask" />
+  </div>
+
+  <div class="form-group mb-2 mr-2 no-wrap">
+    <label for="spring-batch-execution-filters-end-date">au :</label>
+    <input class="form-control ml-2" id="spring-batch-execution-filters-end-date" name="endDate" placeholder="jj/mm/aaaa HH:MM:SS" type="text" [ngModel]="endDateInputValue" (ngModelChange)="onEndDateChange($event)"
+      [textMask]="dateTextMask" />
+  </div>
+</form>

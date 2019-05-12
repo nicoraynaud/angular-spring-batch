@@ -1,0 +1,16 @@
+:host {
+  .modal-body {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+  .steps {
+    .arrow {
+      font-size: 130%;
+
+      &:last-child {
+        display: none;
+      }
+    }
+  }
+}

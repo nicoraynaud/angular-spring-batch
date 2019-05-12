@@ -1,0 +1,16 @@
+:host {
+  display: block;
+
+  button {
+    cursor: pointer;
+    outline: none;
+
+    &.active {
+      cursor: default;
+    }
+  }
+
+  .list-group {
+    overflow-y: scroll;
+  }
+}

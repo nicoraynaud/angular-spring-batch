@@ -1,0 +1,49 @@
+<div class="modal-backdrop show"></div>
+
+<div class="d-block modal">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title w-100 float-right" [title]="execution.status.label">
+          <fa-icon [fixedWidth]="true" [icon]="execution.status.icon" [ngClass]="'text-' + execution.status.color"></fa-icon>
+          Détails de l'exécution du job « {{execution.jobName}} »
+          <button class="btn btn-primary float-right" (click)="refresh()" *ngIf="!loading" title="Rafraîchir" >
+            <fa-icon [fixedWidth]="true" icon="sync"></fa-icon>
+          </button>
+        </h5>
+        <button class="close" type="button" (click)="close()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <h4>Paramètres</h4>
+        <ul class="mt-2 pl-4">
+          <li *ngFor="let parameter of execution.parameters">
+            <strong>{{parameter.name}} :</strong>
+            <code>{{parameter.value}}</code>
+          </li>
+        </ul>
+
+        <h4 class="border-top mb-3 mt-2 pt-3">Étapes</h4>
+        <spring-batch-loading-indicator-message [loadError]="loadError" loadErrorMessage="Erreur lors du chargement des étapes !" [loading]="loading" loadingMessage="Chargement des étapes..."></spring-batch-loading-indicator-message>
+        <p *ngIf="!loading && !loadError && steps.length === 0" class="lead text-center text-secondary">Aucune étape</p>
+        <div *ngIf="!loading && !loadError && steps.length > 0" class="steps">
+          <ng-container *ngFor="let step of steps">
+            <spring-batch-execution-step [step]="step"></spring-batch-execution-step>
+            <div class="arrow my-2 text-center">
+              <fa-icon icon="arrow-down"></fa-icon>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+
+      <div class="modal-footer" (click)="close()">
+        <button class="btn btn-secondary">
+          <fa-icon [fixedWidth]="true" icon="ban"></fa-icon>
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

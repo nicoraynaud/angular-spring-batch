@@ -1,0 +1,12 @@
+<div *ngIf="job" class="p-3 h-100">
+  <div class="border-bottom d-flex justify-content-between">
+    <h4 [title]="job.lastExecutionStatus.label">
+      <fa-icon [fixedWidth]="true" [icon]="job.lastExecutionStatus.icon" [ngClass]="'text-' + job.lastExecutionStatus.color"></fa-icon>
+      {{job.name}}
+    </h4>
+    <div class="text-secondary">{{job.description}}</div>
+  </div>
+
+  <spring-batch-execution-form class="border-bottom mt-4 pb-3" [job]="job" (start)="onStart($event)"></spring-batch-execution-form>
+  <spring-batch-executions class="mt-4" [job]="job" (stop)="onStop($event)"></spring-batch-executions>
+</div>

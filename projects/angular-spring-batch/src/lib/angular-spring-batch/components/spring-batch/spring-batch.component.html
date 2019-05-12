@@ -1,0 +1,26 @@
+<h2 class="d-flex justify-content-between">
+  Jobs
+</h2>
+
+<div class="row">
+  <div class="col-sm-12">
+    <form name="searchForm" class="form-inline">
+      <div class="input-group w-100 mt-3">
+        <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Recherche">
+        <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+          <fa-icon icon="search"></fa-icon>
+        </button>
+        <button class="input-group-addon btn btn-danger" (click)="clearSearch()" *ngIf="currentSearch">
+          <fa-icon icon="eraser"></fa-icon>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="container-fluid d-flex flex-column h-100">
+  <div class="border bg-light h-100 mt-4 row">
+    <spring-batch-list class="col-3 p-0 h-100" (select)="onSelect($event)"></spring-batch-list>
+    <spring-batch-details class="col-9 p-0 h-100" (executionChange)="onExecutionChange($event)" [job]="job"></spring-batch-details>
+  </div>
+</div>

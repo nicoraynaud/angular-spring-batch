@@ -1,0 +1,7 @@
+:host {
+  display: block;
+
+  > div {
+    overflow-y: auto;
+  }
+}

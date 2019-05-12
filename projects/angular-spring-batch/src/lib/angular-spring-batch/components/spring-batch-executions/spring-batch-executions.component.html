@@ -1,0 +1,100 @@
+<ng-template #executionDetailsModalViewRef></ng-template>
+
+<h6 class="m-0">
+  <button type="button" (click)="toggle()">
+    <fa-icon [fixedWidth]="true" [icon]="visible ? 'chevron-down' : 'chevron-right'"></fa-icon>
+    Liste des exécutions
+  </button>
+</h6>
+
+<div *ngIf="visible">
+  <div class="align-items-center d-flex justify-content-between mt-3">
+    <spring-batch-execution-filters [filters]="filters" (filtersChange)="onFiltersChange($event)"></spring-batch-execution-filters>
+
+    <button class="btn btn-primary mb-2" type="button" (click)="refresh()" [disabled]="loading">
+      <fa-icon [fixedWidth]="true" icon="sync"></fa-icon>
+      Rafraichir
+    </button>
+  </div>
+
+  <spring-batch-loading-indicator-message class="my-5 text-center" [loadError]="loadError" loadErrorMessage="Erreur lors du chargement des exécutions" [loading]="loading" loadingMessage="Chargement des exécutions..."></spring-batch-loading-indicator-message>
+
+  <div *ngIf="!loading && !loadError && executions.length === 0" class="lead my-5 text-center text-secondary">Aucune exécution</div>
+
+  <table *ngIf="!loading && !loadError && executions.length > 0" class="mb-0 table table-sm">
+    <thead class="thead-light">
+      <tr>
+        <th></th>
+        <th>Date de création</th>
+        <th>Date de début</th>
+        <th>Date de fin</th>
+        <th>Durée</th>
+        <th>Code de sortie</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let execution of executions">
+        <td class="align-middle" [title]="execution.status.label">
+          <fa-icon [fixedWidth]="true" [icon]="execution.status.icon" [ngClass]="'text-' + execution.status.color"></fa-icon>
+        </td>
+        <td class="align-middle">{{execution.createTime | date:'dd/MM/yy HH:mm:ss'}}</td>
+        <td class="align-middle">{{execution.startTime | date:'dd/MM/yy HH:mm:ss'}}</td>
+        <td class="align-middle">{{execution.endTime | date:'dd/MM/yy HH:mm:ss'}}</td>
+        <td class="align-middle">{{execution.duration | springBatchDuration}}</td>
+        <td class="align-middle">{{execution.exitCode}}</td>
+        <td class="align-middle">
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-danger" type="button" title="Stopper" (click)="onClickStopButton(execution)" [disabled]="!execution.stoppable">
+              <fa-icon [fixedWidth]="true" icon="stop"></fa-icon>
+            </button>
+            <a class="btn btn-primary ml-1" href="{{execution.logsUrl}}" target="_blank" title="Logs">
+              <fa-icon [fixedWidth]="true" icon="tasks"></fa-icon>
+            </a>
+            <button class="btn btn-info ml-1" type="button" title="Détails sur l'exécution" (click)="onClickExecutionDetails(execution)">
+              <fa-icon [fixedWidth]="true" icon="info"></fa-icon>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class="row justify-content-center" *ngIf="!loadError && totalPages > 1" >
+    Affichage {{page == 0 ? 1 : (page * 5 + 1)}} - {{page == 0 ? queryCount : ( page * 5 + queryCount )}}
+    sur {{totalItems}} items.
+  </div>
+  <nav *ngIf="!loadError && totalPages > 1" class="d-flex justify-content-center mt-2">
+    <ul class="m-0 pagination">
+      <li class="page-item" [ngClass]="{ disabled: loading || page === 0 }">
+        <a class="page-link" href="#" (click)="onClickPagination($event,0)">
+          <span aria-hidden="true">&laquo;&laquo;</span>
+          <span class="sr-only">Première page</span>
+        </a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: loading || page === 0 }">
+        <a class="page-link" href="#" (click)="onClickPagination($event, page - 1)">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Précédent</span>
+        </a>
+      </li>
+      <li *ngFor="let p of pages" class="page-item" [ngClass]="{ active: p === page, disabled: p !== page && loading }">
+        <a class="page-link" href="#" (click)="onClickPagination($event, p)">{{p + 1}}</a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: loading || page >= totalPages - 1 }">
+        <a class="page-link" href="#" (click)="onClickPagination($event, page + 1)">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Suivant</span>
+        </a>
+      </li>
+      <li class="page-item" [ngClass]="{ disabled: loading || page >= totalPages - 1 }">
+        <a class="page-link" href="#" (click)="onClickPagination($event, totalPages - 1)">
+          <span aria-hidden="true">&raquo;&raquo;</span>
+          <span class="sr-only">Dernière page</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>

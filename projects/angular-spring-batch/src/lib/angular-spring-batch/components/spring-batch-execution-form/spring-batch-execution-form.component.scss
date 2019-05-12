@@ -1,0 +1,19 @@
+:host {
+  display: block;
+
+  h6 button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding: 0;
+  }
+
+  .invalid-feedback {
+    display: block !important;
+  }
+
+  .ml-25 {
+    margin-left: 25px;
+  }
+}
