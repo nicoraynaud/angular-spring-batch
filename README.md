@@ -16,6 +16,13 @@ This lib was developed by the following persons (if any co-author wants, I can a
 - Kilian
 - Nicolas (me)
 
+## Screenshots
+
+![admin/jobs page](https://user-images.githubusercontent.com/184581/57590024-d4a6f880-74f6-11e9-8319-cbc802b190b0.png "Logo The Jobs component")
+
+![details](https://user-images.githubusercontent.com/184581/57590072-1e8fde80-74f7-11e9-95b1-7a536de8bf02.png "A Job execution detail")
+
+
 ## JHipster compatibility
 
 | JHipster      | angular-spring-batch |
