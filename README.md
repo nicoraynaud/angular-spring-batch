@@ -1,51 +1,60 @@
-# Angular Spring Jobs
+# Angular Spring Batch
 
-Cette librairie expose un composant permettant l'affichage et le lancement de
-jobs Spring Batch d'une application Spring Boot.
+This lib makes a series of component availables to manage Spring Batch jobs form an Angular Front-End.
 
-## Compatibilité JHipster
+You can search, list, start, stop and analyse results of spring batch jobs within an Angular app.
 
+This lib is meant to be used with the backend lib for exposing Spring Batch REST API : [spring-batch-rest-api](https://github.com/nicoraynaud/spring-batch-rest-api).
+
+
+## Authors
+
+This lib was developed by the following persons (if any co-author wants, I can add his full name and github or personal page link right here) :
+- Jérome
+- Alexis
+- Noémie
+- Kilian
+- Nicolas (me)
+
+## JHipster compatibility
 
 | JHipster      | angular-spring-batch |
-| ------------- | ---------------- |
-|  *            | 2.0.x
-|  5.x          | 1.7.x            |
-|  4.14.x       | 1.6.x            |
-|  4.13.x       | 1.5.x            |
+| ------------- | -------------------- |
+|  5.x          | 1.x.x                |
 
 
-## Prérequis
+## Prerequisites
 
-- 2.0.x
+- You need at least the following libs and versions for this lib to work
   - `bootstrap` `4.1.0`
   - `@angular/*` `^6.0.0`
   - `@angular/cli` `^6.0.3`
 
-- 1.x.x
-  - `bootstrap` `4.1.0`
-  - `@angular/*` `^5.2.11`
-  - `@angular/cli` `^1.7.4`
 
-## Installation et intégration
+## Install and integrate
 
-### Installation
+### Install
 
-Installer la dépendence avec `yarn` :
+Install with `yarn` :
 
 ```bash
 yarn add angular-spring-batch
 ```
+or `npm`
 
-Pour les applications angular 5, il est nécessaire d'installer la dépendence `rxjs-compat` :
+```bash
+npm install angular-spring-batch
+```
+
+For Angular 5, the following dependency is also needed :
 
 ```bash
 yarn add rxjs-compat
 ```
 
-### Intégration
+### HOw to use
 
-Intégrer le module `AngularSpringBatch` (par exemple, dans le module `AdminModule`
-pour les applications JHipster) :
+Add the `SpringBatchModule` module in your app (for example, in JHipster, import it in the `AdminModule` module)
 
 ```typescript
 import { SpringBatchModule } from 'angular-spring-batch';
@@ -63,8 +72,7 @@ export class AdminModule {
 
 ### Route
 
-Définir la route (dans le fichier `admin.routes.ts` pour les applications
-JHipster) :
+Define the following route : (for JHipster, you can do it in the `admin.routes.ts` file) :
 
 ```typescript
 import { SpringBatchComponent } from 'angular-spring-batch';
@@ -82,10 +90,9 @@ const ADMIN_ROUTES = [auditsRoute, configurationRoute, docsRoute, healthRoute, l
 ...
 ```
 
-### Traduction
+### Translation (JHipster specific)
 
-Si besoin rajouter le fichier `jobs.json` pour la traduction du titre de la
-page :
+If needed, you can add a i18N translations in `jobs.json` :
 
 ```json
 {
@@ -95,10 +102,9 @@ page :
 }
 ```
 
-### Intégration HTML
+### In a template
 
-Il suffit de rajouter un lien vers la page `/admin/jobs` (par exemple dans le
-fichier `navbar.component.html` pour les applications JHipster) :
+You then just need to add a link to `/admin/jobs` (for example, in JHipster, you can do it in `navbar.component.html`) :
 
 ```html
 <li>
@@ -109,7 +115,7 @@ fichier `navbar.component.html` pour les applications JHipster) :
 </li>
 ```
 
-## Build et distribution
+## Build and distribute
 
 ### Build
 
@@ -120,7 +126,7 @@ $ npm run build
 
 ### Test locally
 
-Le script suivant lance un ng serve ainsi qu'un petit proxy pour rediriger le traffic /api et /management vers localhost:8080.
+The following script starts `ng serve` as well as a proxy conf that redirects any traffic to `/api` and `/management` toward localhost:8080.
 Voir proxy.conf.json pour modifier.
 
 ```bash
@@ -133,9 +139,9 @@ $ npm run start
 $ npm run packagr
 ```
 
-### Distribution
+### Distribute
 
 ```bash
 $ cd dist/angular-spring-batch
-$ npm publish dist/angular-spring-batch
+$ npm publish
 ```
