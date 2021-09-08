@@ -28,7 +28,8 @@ This lib was developed by the following persons (if any co-author wants, I can a
 | JHipster      | angular-spring-batch |
 | ------------- | -------------------- |
 |  5.x          | 1.x.x                |
-|  7.x          | 2.x.x                |
+|  6.x          | 2.x.x                |
+|  7.x          | 3.x.x                |
 
 
 ## Prerequisites
