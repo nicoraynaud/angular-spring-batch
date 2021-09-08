@@ -28,14 +28,15 @@ This lib was developed by the following persons (if any co-author wants, I can a
 | JHipster      | angular-spring-batch |
 | ------------- | -------------------- |
 |  5.x          | 1.x.x                |
+|  7.x          | 2.x.x                |
 
 
 ## Prerequisites
 
 - You need at least the following libs and versions for this lib to work
-  - `bootstrap` `4.1.0`
-  - `@angular/*` `^6.0.0`
-  - `@angular/cli` `^6.0.3`
+  - `bootstrap` `4.6.0`
+  - `@angular/*` `12.0.5`
+  - `@angular/cli` `12.0.5`
 
 
 ## Install and integrate
@@ -134,7 +135,7 @@ $ npm run build
 ### Test locally
 
 The following script starts `ng serve` as well as a proxy conf that redirects any traffic to `/api` and `/management` toward localhost:8080.
-Voir proxy.conf.json pour modifier.
+See proxy.conf.json to change this.
 
 ```bash
 $ npm run start

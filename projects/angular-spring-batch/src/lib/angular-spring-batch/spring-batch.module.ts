@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TextMaskModule } from 'angular2-text-mask';
 import { SpringBatchDetailsComponent } from './components/spring-batch-details/spring-batch-details.component';
 import { SpringBatchExecutionDetailsModalComponent } from './components/spring-batch-execution-details-modal/spring-batch-execution-details-modal.component';
@@ -12,7 +12,7 @@ import { SpringBatchExecutionsComponent } from './components/spring-batch-execut
 import { SpringBatchListComponent } from './components/spring-batch-list/spring-batch-list.component';
 import { SpringBatchLoadingIndicatorMessageComponent } from './components/spring-batch-loading-indicator-message/spring-batch-loading-indicator-message.component';
 import { SpringBatchComponent } from './components/spring-batch/spring-batch.component';
-import './misc/spring-batch-icons';
+import { fontAwesomeIcons } from './misc/spring-batch-icons';
 import { SpringBatchDurationPipe } from './pipes/spring-batch-duration.pipe';
 import { SpringBatchService } from './services/spring-batch.service';
 
@@ -46,4 +46,7 @@ import { SpringBatchService } from './services/spring-batch.service';
   ],
 })
 export class SpringBatchModule {
+  constructor(iconLibrary: FaIconLibrary) {
+    iconLibrary.addIcons(...fontAwesomeIcons);
+  }
 }
