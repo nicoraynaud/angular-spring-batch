@@ -1,7 +1,9 @@
 import { Expose, Transform, Type } from 'class-transformer';
 import { SpringBatchExecutionParameter } from './spring-batch-execution-parameter.model';
 import { SpringBatchExecutionStatus } from './spring-batch-execution-status.model';
+import { TransferType } from './spring-batch.model';
 
+// @dynamic
 export class SpringBatchExecution {
 
   @Expose()
@@ -30,7 +32,7 @@ export class SpringBatchExecution {
   startTime: Date;
 
   @Expose()
-  @Transform((name) => SpringBatchExecutionStatus.valueOf(name) || SpringBatchExecutionStatus.UNKNOWN)
+  @Transform(TransferType.statusTransformer)
   status: SpringBatchExecutionStatus;
 
   get duration() {

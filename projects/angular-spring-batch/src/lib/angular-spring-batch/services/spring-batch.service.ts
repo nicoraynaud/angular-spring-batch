@@ -33,7 +33,7 @@ export class SpringBatchService {
     return this.httpClient.get(`/management/jobs/${job.name}/executions`, { observe: 'response', params: params }).pipe(map((response: HttpResponse<SpringBatchExecution>) => {
       const json = response.body;
       return {
-        items: plainToClass(SpringBatchExecution, json['content'], { strategy: 'excludeAll' }),
+        items: plainToClass(SpringBatchExecution, json['content'] as [], { strategy: 'excludeAll' }),
         page: json['number'],
         totalPages: json['totalPages'],
         totalItems: json['totalElements'],

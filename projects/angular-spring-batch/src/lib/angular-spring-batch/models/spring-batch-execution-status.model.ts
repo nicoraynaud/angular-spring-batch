@@ -1,3 +1,4 @@
+// @dynamic
 export class SpringBatchExecutionStatus {
 
   static readonly values: SpringBatchExecutionStatus[] = [];
@@ -12,7 +13,7 @@ export class SpringBatchExecutionStatus {
   static readonly UNKNOWN = new SpringBatchExecutionStatus('UNKNOWN', 'Inconnu', 'warning', 'question');
 
   static valueOf(name: string) {
-    return this.values.find(etat => etat.name === name);
+    return SpringBatchExecutionStatus.values.find(etat => etat.name === name);
   }
 
   private constructor(public readonly name: string, public label: string, public readonly color: string, public icon: string) {

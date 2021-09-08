@@ -1,6 +1,8 @@
 import { Expose, Transform, Type } from 'class-transformer';
 import { SpringBatchExecutionStatus } from './spring-batch-execution-status.model';
+import { TransferType } from './spring-batch.model';
 
+// @dynamic
 export class SpringBatchExecutionStep {
 
   @Expose()
@@ -42,7 +44,7 @@ export class SpringBatchExecutionStep {
   startTime: Date;
 
   @Expose()
-  @Transform((name) => SpringBatchExecutionStatus.valueOf(name) || SpringBatchExecutionStatus.UNKNOWN)
+  @Transform(TransferType.statusTransformer)
   status: SpringBatchExecutionStatus;
 
   @Expose()
