@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
 import { SpringBatchExecutionParameter } from '../../models/spring-batch-execution-parameter.model';
 import { SpringBatchExecution } from '../../models/spring-batch-execution.model';
 import { SpringBatch } from '../../models/spring-batch.model';
@@ -13,13 +12,7 @@ import { SpringBatchService } from '../../services/spring-batch.service';
 })
 export class SpringBatchExecutionFormComponent {
 
-  private _job: SpringBatch;
-
-  readonly dateTextMask = {
-    keepCharPositions: true,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/],
-    pipe: createAutoCorrectedDatePipe('dd/mm/yyyy HH:MM:SS'),
-  };
+  private _job?: SpringBatch;
 
   execution = new SpringBatchExecution();
   loading = false;
@@ -34,7 +27,7 @@ export class SpringBatchExecutionFormComponent {
   }
 
   @Input()
-  set job(job: SpringBatch) {
+  set job(job: SpringBatch | undefined) {
     this._job = job;
     this.clear();
   }

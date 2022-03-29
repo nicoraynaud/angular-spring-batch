@@ -1,7 +1,7 @@
 {
   "name": "angular-spring-batch",
   "description": "Composant permettant la gestion des jobs pour Angular 5+",
-  "version": "3.0.0",
+  "version": "4.0.10",
   "license": "Apache-2.0",
   "author": {
     "name": "Nicolas Raynaud",
@@ -9,17 +9,18 @@
     "url": "https://github.com/nicoraynaud"
   },
   "dependencies": {
-    "@fortawesome/angular-fontawesome": "^0.9.0",
-    "@fortawesome/fontawesome-svg-core": "^1.2.35",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
-    "class-transformer": "^0.4.0",
-    "moment-mini": "^2.19.4",
-    "angular2-text-mask": "^9.0.0",
-    "text-mask-addons": "^3.7.2"
+    "class-transformer": "^0.5.1",
+    "reflect-metadata": "^0.1.13",
+    "dayjs": "^1.11.0",
+    "ngx-mask": "^13.1.3",
+    "tslib": "^2.3.0"
   },
   "peerDependencies": {
-    "@angular/common": "12.0.5",
-    "@angular/core": "12.0.5",
-    "bootstrap": "^4.6.0"
+    "@fortawesome/angular-fontawesome": "^0.10.2",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
+    "@angular/common": "13.3.0",
+    "@angular/core": "13.3.0",
+    "bootstrap": "^4.6.1"
   }
 }

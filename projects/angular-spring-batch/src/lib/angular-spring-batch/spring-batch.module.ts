@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { FaIconLibrary, FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { TextMaskModule } from 'angular2-text-mask';
+import { NgxMaskModule } from 'ngx-mask';
 import { SpringBatchDetailsComponent } from './components/spring-batch-details/spring-batch-details.component';
 import { SpringBatchExecutionDetailsModalComponent } from './components/spring-batch-execution-details-modal/spring-batch-execution-details-modal.component';
 import { SpringBatchExecutionFiltersComponent } from './components/spring-batch-execution-filters/spring-batch-execution-filters.component';
@@ -39,7 +39,7 @@ import { SpringBatchService } from './services/spring-batch.service';
     CommonModule,
     FontAwesomeModule,
     FormsModule,
-    TextMaskModule,
+    NgxMaskModule.forRoot(),
   ],
   providers: [
     SpringBatchService,

@@ -14,10 +14,10 @@ export class SpringBatchDetailsComponent {
   executionChange = new EventEmitter<SpringBatchExecution>();
 
   @ViewChild(SpringBatchExecutionsComponent)
-  executionsComponent: SpringBatchExecutionsComponent;
+  executionsComponent?: SpringBatchExecutionsComponent;
 
   @Input()
-  job: SpringBatch;
+  job?: SpringBatch | null;
 
   onStart(execution: SpringBatchExecution) {
     this.refresh();

@@ -9,7 +9,7 @@
     </div>
   </a>
 
-  <div *ngIf="!loading && !loadError && jobs.length === 0" class="align-items-center d-flex h-100 justify-content-center lead mx-2 text-secondary">Aucun job</div>
+  <div *ngIf="!loading && !loadError && jobs && jobs.length === 0" class="align-items-center d-flex h-100 justify-content-center lead mx-2 text-secondary">Aucun job</div>
 
   <spring-batch-loading-indicator-message *ngIf="loading || loadError" class="align-items-center d-flex h-100 justify-content-center mx-2" [loadError]="loadError" loadErrorMessage="Erreur lors du chargement des jobs !"
     [loading]="loading" loadingMessage="Chargement des jobs..."></spring-batch-loading-indicator-message>

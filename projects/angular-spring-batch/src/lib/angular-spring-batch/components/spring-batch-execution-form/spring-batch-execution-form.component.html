@@ -10,7 +10,7 @@
     <ng-container *ngFor="let parameter of execution.parameters">
       <div *ngIf="parameter.type === 'DATE'" class="col-6 form-group">
         <label [for]="'job-parameter-' + parameter.name ">{{parameter.name}}</label>
-        <input class="form-control" placeholder="jj/mm/aaaa HH:MM:SS" type="text" [id]="'job-parameter-' + parameter.name" [name]="parameter.name" [(ngModel)]="parameter.inputValue" [textMask]="dateTextMask"
+        <input class="form-control" placeholder="jj/mm/aaaa HH:MM:SS" type="text" [id]="'job-parameter-' + parameter.name" [name]="parameter.name" [(ngModel)]="parameter.inputValue" mask="00/00/0000 00:00:00"
         />
         <div *ngIf="parameter.invalid" class="invalid-feedback">
           {{parameter.name}} est invalide.

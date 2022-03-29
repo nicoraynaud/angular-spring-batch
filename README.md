@@ -25,19 +25,20 @@ This lib was developed by the following persons (if any co-author wants, I can a
 
 ## JHipster compatibility
 
-| JHipster      | angular-spring-batch |
-| ------------- | -------------------- |
-|  5.x          | 1.x.x                |
-|  6.x          | 2.x.x                |
-|  7.x          | 3.x.x                |
+| JHipster    | angular-spring-batch |
+|-------------|----------------------|
+| 5.x         | 1.x.x                |
+| 6.x         | 2.x.x                |
+| 7.x - 7.3.x | 3.x.x                |
+| 7.4.x - +   | 4.x.x                |
 
 
 ## Prerequisites
 
 - You need at least the following libs and versions for this lib to work
-  - `bootstrap` `4.6.0`
-  - `@angular/*` `12.0.5`
-  - `@angular/cli` `12.0.5`
+  - `bootstrap` `4.6.1`
+  - `@angular/*` `13.1.1`
+  - `@angular/cli` `13.1.2`
 
 
 ## Install and integrate

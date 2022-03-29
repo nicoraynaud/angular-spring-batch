@@ -1,5 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { moment } from '../misc/spring-batch-moment';
 
 @Pipe({
   name: 'springBatchDuration',
@@ -11,12 +10,15 @@ export class SpringBatchDurationPipe implements PipeTransform {
     return `${string.length < 2 ? '0' : ''}${string}`;
   }
 
-  transform(seconds: number) {
+  transform(seconds: number | null | undefined) {
     if (seconds === null || seconds === undefined) {
       return null;
     }
-    const duration = moment.duration(seconds * 1000);
-    return `${this.formatNumber(duration.get('hours'))}:${this.formatNumber(duration.get('minutes'))}:${this.formatNumber(duration.get('seconds'))}`;
+
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds - (h*3600)) / 60);
+    const s = Math.floor(seconds % 60);
+    return `${this.formatNumber(h)}:${this.formatNumber(m)}:${this.formatNumber(s)}`;
   }
 
 }

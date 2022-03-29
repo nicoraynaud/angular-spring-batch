@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import createAutoCorrectedDatePipe from 'text-mask-addons/dist/createAutoCorrectedDatePipe';
-import { moment } from '../../misc/spring-batch-moment';
+import * as dayjs from 'dayjs';
 import { SpringBatchExecutionFilters } from '../../models/spring-batch-execution-filters.model';
 import { SpringBatchExecutionStatus } from '../../models/spring-batch-execution-status.model';
 
@@ -11,17 +10,11 @@ import { SpringBatchExecutionStatus } from '../../models/spring-batch-execution-
 })
 export class SpringBatchExecutionFiltersComponent {
 
-  private _filters: SpringBatchExecutionFilters;
+  private _filters?: SpringBatchExecutionFilters;
 
-  beginDateInputValue: string;
+  beginDateInputValue?: string | null;
 
-  readonly dateTextMask = {
-    keepCharPositions: true,
-    mask: [/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/, ' ', /\d/, /\d/, ':', /\d/, /\d/, ':', /\d/, /\d/],
-    pipe: createAutoCorrectedDatePipe('dd/mm/yyyy HH:MM:SS'),
-  };
-
-  endDateInputValue: string;
+  endDateInputValue?: string | null;
 
   @Output()
   filtersChange = new EventEmitter<SpringBatchExecutionFilters>();
@@ -33,24 +26,29 @@ export class SpringBatchExecutionFiltersComponent {
   }
 
   @Input()
-  set filters(value: SpringBatchExecutionFilters) {
+  set filters(value: SpringBatchExecutionFilters | undefined) {
     this._filters = value;
-    this.beginDateInputValue = this.dateInputValue(this.filters.beginDate);
-    this.endDateInputValue = this.dateInputValue(this.filters.endDate);
+    if (this.filters) {
+      this.beginDateInputValue = this.dateInputValue(this.filters.beginDate);
+      this.endDateInputValue = this.dateInputValue(this.filters.endDate);
+    }
   }
 
   private dateInputValue(date: Date) {
-    return date ? moment(date).format('DD/MM/YYYY HH:mm:ss') : null;
+    return date ? dayjs(date).format('DD/MM/YYYY HH:mm:ss') : null;
   }
 
   private parseDate(value: string) {
-    const m = moment(value, 'DD/MM/YYYY HH:mm:ss', true);
+    let m = dayjs(value, 'DD/MM/YYYY HH:mm:ss', true);
+    if (!m) {
+      m = dayjs(value, 'DDMMYYYYHHmmss', true);
+    }
     return m.isValid() ? m.toDate() : null;
   }
 
   onBeginDateChange(value: string) {
     const date = this.parseDate(value);
-    if (date !== this.filters.beginDate) {
+    if (date && this.filters && date !== this.filters.beginDate) {
       this.filters.beginDate = date;
       this.filtersChange.emit(this.filters);
     }
@@ -58,14 +56,14 @@ export class SpringBatchExecutionFiltersComponent {
 
   onEndDateChange(value: string) {
     const date = this.parseDate(value);
-    if (date !== this.filters.endDate) {
+    if (date && this.filters && date !== this.filters.endDate) {
       this.filters.endDate = date;
       this.filtersChange.emit(this.filters);
     }
   }
 
   onStatusChange(status: SpringBatchExecutionStatus) {
-    this.filters.status = status;
+    this.filters!.status = status;
     this.filtersChange.emit(this.filters);
   }
 

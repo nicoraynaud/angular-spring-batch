@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { moment } from '../misc/spring-batch-moment';
+import * as dayjs from 'dayjs';
 import { SpringBatchExecutionFilters } from '../models/spring-batch-execution-filters.model';
 import { SpringBatchExecutionStep } from '../models/spring-batch-execution-step.model';
 import { SpringBatchExecution } from '../models/spring-batch-execution.model';
@@ -22,16 +22,25 @@ export class SpringBatchService {
     .append('size', String(5))
     .append('sort', 'createTime,desc');
     if (filters.beginDate) {
-      params = params.append('executionBeginDate', moment(filters.beginDate).format('YYYY-MM-DDTHH:mm:ss'));
+      params = params.append('executionBeginDate', dayjs(filters.beginDate).format('YYYY-MM-DDTHH:mm:ss'));
     }
     if (filters.endDate) {
-      params = params.append('executionEndDate', moment(filters.endDate).format('YYYY-MM-DDTHH:mm:ss'));
+      params = params.append('executionEndDate', dayjs(filters.endDate).format('YYYY-MM-DDTHH:mm:ss'));
     }
     if (filters.status) {
       params = params.append('status', filters.status.name);
     }
-    return this.httpClient.get(`/management/jobs/${job.name}/executions`, { observe: 'response', params: params }).pipe(map((response: HttpResponse<SpringBatchExecution>) => {
+    return this.httpClient.get<any>(`/management/jobs/${job.name}/executions`, { observe: 'response', params: params }).pipe(map((response: HttpResponse<any>) => {
       const json = response.body;
+      if (json === null) {
+        return {
+          items: [],
+          page: 0,
+          totalPages: 0,
+          totalItems: 0,
+          queryCount: 0
+        };
+      }
       return {
         items: plainToClass(SpringBatchExecution, json['content'] as [], { strategy: 'excludeAll' }),
         page: json['number'],
@@ -43,7 +52,7 @@ export class SpringBatchService {
   }
 
   findAllJobExecutionSteps(execution: SpringBatchExecution): Observable<SpringBatchExecutionStep[]> {
-    return this.httpClient.get(`/management/jobs/executions/${execution.id}/stepexecutions`).pipe(map((response: SpringBatchExecutionStep[]) => {
+    return this.httpClient.get<SpringBatchExecutionStep[]>(`/management/jobs/executions/${execution.id}/stepexecutions`).pipe(map((response: SpringBatchExecutionStep[]) => {
       return plainToClass(SpringBatchExecutionStep, response, { strategy: 'excludeAll' });
     }));
   }
@@ -53,10 +62,10 @@ export class SpringBatchService {
     if (req) {
       options = options.set('jobName', req);
     }
-    return this.httpClient.get('/management/jobs', { params: options}).pipe(map((response: SpringBatch[]) => {
-      return plainToClass(SpringBatch, response, { strategy: 'excludeAll' }).sort((first, second) => {
-        return first.name.toLowerCase().localeCompare(second.name.toLowerCase());
-      });
+    return this.httpClient.get<SpringBatch[]>('/management/jobs', { params: options}).pipe(
+      map((response: SpringBatch[]) => {
+        return plainToClass(SpringBatch, response, { strategy: 'excludeAll' })
+          .sort((first, second) => first.name.toLowerCase().localeCompare(second.name.toLowerCase()));
     }));
   }
 

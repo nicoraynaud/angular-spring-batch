@@ -11,10 +11,10 @@ import { SpringBatchService } from '../../services/spring-batch.service';
 })
 export class SpringBatchListComponent implements OnInit {
 
-  jobs: SpringBatch[];
+  jobs?: SpringBatch[] | null;
   loadError = false;
   loading = false;
-  selected: SpringBatch;
+  selected?: SpringBatch | null;
 
   @Output()
   select = new EventEmitter<SpringBatch>();
@@ -26,7 +26,7 @@ export class SpringBatchListComponent implements OnInit {
     this.refreshAllJob(true);
   }
 
-  onSelect(event, job: SpringBatch) {
+  onSelect(event: any, job: SpringBatch) {
     event.preventDefault();
     if (job === this.selected) {
       return;
@@ -57,12 +57,12 @@ export class SpringBatchListComponent implements OnInit {
 
   refreshByJob(jobName: string) {
       this.jobsService.findJob(jobName).subscribe((job) => {
-        if (this.selected.name === job.name) {
+        if (this.selected!.name === job.name) {
           this.selected = job;
         }
-        const index = this.jobs.map((item) => item.name).indexOf(jobName);
+        const index = this.jobs!.map((item) => item.name).indexOf(jobName);
         if (index >= 0) {
-          this.jobs[index] = job;
+          this.jobs![index] = job;
         }
       });
   }

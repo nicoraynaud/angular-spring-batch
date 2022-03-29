@@ -1,9 +1,9 @@
 import { Expose } from 'class-transformer';
-import { moment } from '../misc/spring-batch-moment';
+import * as dayjs from 'dayjs';
 
 export class SpringBatchExecutionParameter {
 
-  private _inputValue: string;
+  private _inputValue?: string | null;
 
   @Expose()
   name: string;
@@ -25,17 +25,17 @@ export class SpringBatchExecutionParameter {
 
     switch (this.type) {
       case 'DATE':
-        const m = moment(value, 'DD/MM/YYYY HH:mm:ss', true);
+        const m = value ? dayjs(value, 'DD/MM/YYYY HH:mm:ss', true) : dayjs();
         this.value = m.isValid() ? m.format('YYYY-MM-DDTHH:mm:ss') : null;
         this._inputValue = this.value;
         break;
       case 'DOUBLE':
-        const double = parseFloat(value);
+        const double = value ? parseFloat(value) : 0;
         this.value = isNaN(double) ? null : double.toString();
         this._inputValue = this.value;
         break;
       case 'LONG':
-        const long = parseInt(value, 10);
+        const long = value ? parseInt(value, 10) : 0;
         this.value = isNaN(long) ? null : long.toString();
         this._inputValue = this.value;
         break;
@@ -61,7 +61,7 @@ export class SpringBatchExecutionParameter {
     return !this.invalid;
   }
 
-  constructor(name?: string, type?: string, defaultValue?: string) {
+  constructor(name: string, type: string, defaultValue: string) {
     this.name = name;
     this.type = type;
     this.defaultValue = defaultValue;

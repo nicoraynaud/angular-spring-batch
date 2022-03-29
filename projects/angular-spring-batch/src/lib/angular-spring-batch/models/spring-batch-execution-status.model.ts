@@ -1,4 +1,6 @@
 // @dynamic
+import {IconProp} from '@fortawesome/fontawesome-svg-core';
+
 export class SpringBatchExecutionStatus {
 
   static readonly values: SpringBatchExecutionStatus[] = [];
@@ -16,7 +18,7 @@ export class SpringBatchExecutionStatus {
     return SpringBatchExecutionStatus.values.find(etat => etat.name === name);
   }
 
-  private constructor(public readonly name: string, public label: string, public readonly color: string, public icon: string) {
+  private constructor(public readonly name: string, public label: string, public readonly color: string, public icon: IconProp) {
     SpringBatchExecutionStatus.values.push(this);
   }
 

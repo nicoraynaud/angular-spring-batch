@@ -13,11 +13,11 @@ import { SpringBatchService } from '../../services/spring-batch.service';
 export class SpringBatchExecutionDetailsModalComponent implements OnInit {
 
   @Input()
-  execution: SpringBatchExecution;
+  execution?: SpringBatchExecution;
 
   loadError = false;
   loading = false;
-  steps: SpringBatchExecutionStep[];
+  steps?: SpringBatchExecutionStep[];
 
   constructor(private springBatchService: SpringBatchService) {
   }
@@ -28,7 +28,7 @@ export class SpringBatchExecutionDetailsModalComponent implements OnInit {
   loadSteps() {
     this.loadError = false;
     this.loading = true;
-    this.springBatchService.findAllJobExecutionSteps(this.execution).pipe(
+    this.springBatchService.findAllJobExecutionSteps(this.execution!).pipe(
       catchError(error => {
         this.loadError = true;
         return throwError(error);

@@ -15,13 +15,13 @@ import { SpringBatchExecutionDetailsModalComponent } from '../spring-batch-execu
 })
 export class SpringBatchExecutionsComponent implements OnInit {
 
-  private _job: SpringBatch;
+  private _job!: SpringBatch;
   private readonly maxPages = 11;
 
-  executionDetailsModalComponentRef: ComponentRef<SpringBatchExecutionDetailsModalComponent>;
+  executionDetailsModalComponentRef?: ComponentRef<SpringBatchExecutionDetailsModalComponent>;
 
   @ViewChild('executionDetailsModalViewRef', { read: ViewContainerRef })
-  executionDetailsModalViewRef: ViewContainerRef;
+  executionDetailsModalViewRef?: ViewContainerRef;
 
   executions: SpringBatchExecution[] = [];
   filters = new SpringBatchExecutionFilters();
@@ -56,7 +56,7 @@ export class SpringBatchExecutionsComponent implements OnInit {
     return Array(count).fill(null).map((x, index) => first + index);
   }
 
-  constructor(private componentFactoryResolver: ComponentFactoryResolver, @Inject(DOCUMENT) private document, private jobsService: SpringBatchService) {
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, @Inject(DOCUMENT) private document: any, private jobsService: SpringBatchService) {
   }
 
   loadExecutions(page = 0) {
@@ -83,14 +83,14 @@ export class SpringBatchExecutionsComponent implements OnInit {
     this.refresh();
   }
 
-  onClickExecutionDetails(execution) {
+  onClickExecutionDetails(execution: any) {
     const factory = this.componentFactoryResolver.resolveComponentFactory(SpringBatchExecutionDetailsModalComponent);
-    this.executionDetailsModalComponentRef = this.executionDetailsModalViewRef.createComponent(factory);
-    this.executionDetailsModalComponentRef.instance.close = () => this.executionDetailsModalComponentRef.destroy();
+    this.executionDetailsModalComponentRef = this.executionDetailsModalViewRef!.createComponent(factory);
+    this.executionDetailsModalComponentRef.instance.close = () => this.executionDetailsModalComponentRef!.destroy();
     this.executionDetailsModalComponentRef.instance.execution = execution;
   }
 
-  onClickPagination(event, page) {
+  onClickPagination(event: any, page: any) {
     event.preventDefault();
     this.loadExecutions(page);
   }

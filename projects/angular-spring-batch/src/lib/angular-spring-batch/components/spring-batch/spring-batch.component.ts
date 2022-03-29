@@ -11,18 +11,18 @@ import { SpringBatchListComponent } from '../spring-batch-list/spring-batch-list
 })
 export class SpringBatchComponent {
 
-  job: SpringBatch;
+  job?: SpringBatch | null;
 
   @ViewChild(SpringBatchDetailsComponent)
-  jobDetailsComponent: SpringBatchDetailsComponent;
+  jobDetailsComponent?: SpringBatchDetailsComponent;
 
   @ViewChild(SpringBatchListComponent)
-  jobsListComponent: SpringBatchListComponent;
+  jobsListComponent?: SpringBatchListComponent;
 
-  currentSearch: string;
+  currentSearch?: string | null;
 
   onExecutionChange(execution: SpringBatchExecution) {
-    this.jobsListComponent.refreshByJob(execution.jobName);
+    this.jobsListComponent!.refreshByJob(execution.jobName);
   }
 
   onSelect(job: SpringBatch) {
@@ -34,10 +34,10 @@ export class SpringBatchComponent {
     this.search();
   }
 
-  search(query?: string) {
+  search(query?: string | null) {
     this.job = null;
-    this.jobDetailsComponent.refresh();
-    this.jobsListComponent.refreshAllJob(false, query);
+    this.jobDetailsComponent!.refresh();
+    this.jobsListComponent!.refreshAllJob(false, query!);
   }
 
 }
