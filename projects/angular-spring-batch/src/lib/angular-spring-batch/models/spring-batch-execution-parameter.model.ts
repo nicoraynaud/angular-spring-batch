@@ -1,5 +1,4 @@
 import { Expose } from 'class-transformer';
-import * as dayjs from 'dayjs';
 
 export class SpringBatchExecutionParameter {
 
@@ -25,8 +24,8 @@ export class SpringBatchExecutionParameter {
 
     switch (this.type) {
       case 'DATE':
-        const m = value ? dayjs(value, 'DD/MM/YYYY HH:mm:ss', true) : dayjs();
-        this.value = m.isValid() ? m.format('YYYY-MM-DDTHH:mm:ss') : null;
+        const m = this.parseDate(value);
+        this.value = m;
         this._inputValue = this.value;
         break;
       case 'DOUBLE':
@@ -68,4 +67,12 @@ export class SpringBatchExecutionParameter {
     this.inputValue = defaultValue;
   }
 
+  private parseDate(value: string) {
+    try {
+      new Date(value);
+      return value;
+    } catch (err) {
+      return null;
+    }
+  }
 }

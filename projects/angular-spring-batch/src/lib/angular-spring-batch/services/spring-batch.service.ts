@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { plainToClass } from 'class-transformer';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as dayjs from 'dayjs';
 import { SpringBatchExecutionFilters } from '../models/spring-batch-execution-filters.model';
 import { SpringBatchExecutionStep } from '../models/spring-batch-execution-step.model';
 import { SpringBatchExecution } from '../models/spring-batch-execution.model';
@@ -22,10 +21,10 @@ export class SpringBatchService {
     .append('size', String(5))
     .append('sort', 'createTime,desc');
     if (filters.beginDate) {
-      params = params.append('executionBeginDate', dayjs(filters.beginDate).format('YYYY-MM-DDTHH:mm:ss'));
+      params = params.append('executionBeginDate', filters.beginDate.toISOString());
     }
     if (filters.endDate) {
-      params = params.append('executionEndDate', dayjs(filters.endDate).format('YYYY-MM-DDTHH:mm:ss'));
+      params = params.append('executionEndDate', filters.endDate.toISOString());
     }
     if (filters.status) {
       params = params.append('status', filters.status.name);

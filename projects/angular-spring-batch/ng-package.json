@@ -7,7 +7,6 @@
   "allowedNonPeerDependencies": [
     "class-transformer",
     "reflect-metadata",
-    "dayjs",
     "ngx-mask"
   ]
 }

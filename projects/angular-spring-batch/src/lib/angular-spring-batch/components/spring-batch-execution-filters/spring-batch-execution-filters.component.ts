@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import * as dayjs from 'dayjs';
 import { SpringBatchExecutionFilters } from '../../models/spring-batch-execution-filters.model';
 import { SpringBatchExecutionStatus } from '../../models/spring-batch-execution-status.model';
 
@@ -35,15 +34,15 @@ export class SpringBatchExecutionFiltersComponent {
   }
 
   private dateInputValue(date: Date) {
-    return date ? dayjs(date).format('DD/MM/YYYY HH:mm:ss') : null;
+    return date ? date.toISOString() : null;
   }
 
   private parseDate(value: string) {
-    let m = dayjs(value, 'DD/MM/YYYY HH:mm:ss', true);
-    if (!m) {
-      m = dayjs(value, 'DDMMYYYYHHmmss', true);
+    try {
+      return new Date(value);
+    } catch (err) {
+      return null;
     }
-    return m.isValid() ? m.toDate() : null;
   }
 
   onBeginDateChange(value: string) {
